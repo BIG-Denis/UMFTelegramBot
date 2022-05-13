@@ -1,7 +1,11 @@
+
 import telebot
 import json
 import sqlite3
 import io
+import platform
+import sys
+
 from random import randint
 from datetime import *
 from ploziks import *
@@ -21,7 +25,6 @@ with open('res/settings.json', 'r', encoding='utf8') as file:
     welcomes = np.array(json_file['welcomes'])
     commands = np.array(json_file['commands'])
 
-
 try:
     sql_vip = f'SELECT user_id FROM users WHERE vip_status=1'
     con = sqlite3.connect('res/database.db')
@@ -31,6 +34,9 @@ try:
     con.close()
 except:
     vip_users = []
+
+if platform.system() == 'Windows':
+    sys.exit()
 
 
 command_message = '\n\nДоступные команды:\n'
